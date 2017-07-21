@@ -1,5 +1,5 @@
-import { TodoCollection } from '~/model'
+import { MemoryCollection } from '~/model'
 
 export class Store {
-  todoCollection = new TodoCollection(this)
+  memoryCollection = new MemoryCollection(this)
 }

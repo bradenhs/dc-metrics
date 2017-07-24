@@ -1,34 +1,76 @@
 type Constructable<T> = new (...args: any[]) => T;
-type Mx<T> = (base: any) => Constructable<T>;
+type Mixin<T> = (base: any) => Constructable<T>;
 
+export function mix<A, B, C, D, E, F, G, H, I, J>(
+  a: Mixin<A>,
+  b: Mixin<B>,
+  c: Mixin<C>,
+  d: Mixin<D>,
+  e: Mixin<E>,
+  f: Mixin<F>,
+  g: Mixin<G>,
+  h: Mixin<H>,
+  i: Mixin<I>,
+  j: Mixin<J>
+): Constructable<A & B & C & D & E & F & G & H & I & J>;
+export function mix<A, B, C, D, E, F, G, H, I>(
+  a: Mixin<A>,
+  b: Mixin<B>,
+  c: Mixin<C>,
+  d: Mixin<D>,
+  e: Mixin<E>,
+  f: Mixin<F>,
+  g: Mixin<G>,
+  h: Mixin<H>,
+  i: Mixin<I>
+): Constructable<A & B & C & D & E & F & G & H & I>;
+export function mix<A, B, C, D, E, F, G, H>(
+  a: Mixin<A>,
+  b: Mixin<B>,
+  c: Mixin<C>,
+  d: Mixin<D>,
+  e: Mixin<E>,
+  f: Mixin<F>,
+  g: Mixin<G>,
+  h: Mixin<H>
+): Constructable<A & B & C & D & E & F & G & H>;
+export function mix<A, B, C, D, E, F, G>(
+  a: Mixin<A>,
+  b: Mixin<B>,
+  c: Mixin<C>,
+  d: Mixin<D>,
+  e: Mixin<E>,
+  f: Mixin<F>,
+  g: Mixin<G>
+): Constructable<A & B & C & D & E & F & G>;
 export function mix<A, B, C, D, E, F>(
-  a: Mx<A>,
-  b: Mx<B>,
-  c: Mx<C>,
-  d: Mx<D>,
-  e: Mx<E>,
-  f: Mx<F>
+  a: Mixin<A>,
+  b: Mixin<B>,
+  c: Mixin<C>,
+  d: Mixin<D>,
+  e: Mixin<E>,
+  f: Mixin<F>
 ): Constructable<A & B & C & D & E & F>;
 export function mix<A, B, C, D, E>(
-  a: Mx<A>,
-  b: Mx<B>,
-  c: Mx<C>,
-  d: Mx<D>,
-  e: Mx<E>
+  a: Mixin<A>,
+  b: Mixin<B>,
+  c: Mixin<C>,
+  d: Mixin<D>,
+  e: Mixin<E>
 ): Constructable<A & B & C & D & E>;
 export function mix<A, B, C, D>(
-  a: Mx<A>,
-  b: Mx<B>,
-  c: Mx<C>,
-  d: Mx<D>
+  a: Mixin<A>,
+  b: Mixin<B>,
+  c: Mixin<C>,
+  d: Mixin<D>
 ): Constructable<A & B & C & D>;
 export function mix<A, B, C>(
-  a: Mx<A>,
-  b: Mx<B>,
-  c: Mx<C>
+  a: Mixin<A>,
+  b: Mixin<B>,
+  c: Mixin<C>
 ): Constructable<A & B & C>;
-export function mix<A, B>(a: Mx<A>, b: Mx<B>): Constructable<A & B>;
-export function mix<A>(a: Mx<A>): Constructable<A>;
-export function mix(...mixins: Mx<any>[]) {
+export function mix<A, B>(a: Mixin<A>, b: Mixin<B>): Constructable<A & B>;
+export function mix<A>(a: Mixin<A>): Constructable<A>;
+export function mix(...mixins: Mixin<any>[]) {
   return mixins.reduce((clazz, mixin) => mixin(clazz), class {});
 }

@@ -10,6 +10,9 @@ import { App } from "~/view";
 import { Store } from "~/store";
 import { style } from "typestyle";
 import { StoreProvider } from "~/utils";
+import { useStrict } from "mobx";
+
+useStrict(true);
 
 // Initial CSS setup
 normalize();

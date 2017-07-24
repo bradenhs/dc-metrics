@@ -8,7 +8,7 @@ const chartContainerClassName = style({
   background: "blue"
 });
 
-export const App = ReactiveComponent((_, store) => {
+export const App = ReactiveComponent(({}, store) => {
   return (
     <div>
       <div className={chartContainerClassName}>

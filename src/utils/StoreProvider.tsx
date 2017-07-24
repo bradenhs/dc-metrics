@@ -1,8 +1,11 @@
 import * as React from "react";
 import { object } from "prop-types";
-import { Store } from "~/model";
 
-export class StoreProvider extends React.Component<{ store: Store }> {
+type Constructor<T> = new (...args: any[]) => T;
+
+export class StoreProvider<T extends Constructor<{}>> extends React.Component<{
+  store: T;
+}> {
   getChildContext() {
     return {
       store: this.props.store

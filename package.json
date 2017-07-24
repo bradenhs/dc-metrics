@@ -8,7 +8,7 @@
     "check-format": "prettier --list-different \"src/**/*.{ts,tsx}\"",
     "bundle": "webpack -p",
     "start": "webpack-dev-server",
-    "ci": "npm run check-format && npm test && npm run bundle",
+    "ci": "npm run check-format && npm run bundle && npm test",
     "test": "jest"
   },
   "jest": {

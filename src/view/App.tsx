@@ -9,6 +9,7 @@ const chartContainerClassName = style({
 });
 
 export const App = ReactiveComponent(({}, store) => {
+  console.log(store);
   return (
     <div>
       <div className={chartContainerClassName}>
@@ -17,7 +18,6 @@ export const App = ReactiveComponent(({}, store) => {
           containerComponent={<V.VictoryContainer responsive={false} />}
         >
           <V.VictoryArea
-            data={store.memoryCollection.devMemoryFree}
             style={{
               data: {
                 fill: "rgba(50,200,100,.3)"

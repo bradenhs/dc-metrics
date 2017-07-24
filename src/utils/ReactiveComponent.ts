@@ -5,7 +5,7 @@ import {
   StatelessComponent
 } from "react";
 import { observer } from "mobx-react";
-import { Store } from "~/model";
+import { Store } from "~/store";
 import { object } from "prop-types";
 
 interface StatelessReactiveComponent<P = {}> {

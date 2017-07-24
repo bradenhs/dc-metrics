@@ -1,5 +1,5 @@
-import { MemoryCollection } from '~/model'
+import { MemoryCollection } from "~/model";
 
 export class Store {
-  memoryCollection = new MemoryCollection(this)
+  memoryCollection = new MemoryCollection();
 }

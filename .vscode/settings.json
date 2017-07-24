@@ -1,15 +1,12 @@
-// Place your settings in this file to overwrite default and user settings.
 {
-  "editor.formatOnSave": true,
-  "prettier.printWidth": 80,
-  "prettier.semi": false,
-  "prettier.singleQuote": true,
-  "prettier.jsxSingleQuote": true,
-  "prettier.useTabs": false,
-  "prettier.tabWidth": 2,
-  "prettier.spaceBeforeFunctionParen": true,
-  "prettier.typescriptEnable": [
-    "typescript",
-    "typescriptreact"
-  ]
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "node_modules": true,
+    "coverage": true
+  },
+  "editor.formatOnSave": true
 }

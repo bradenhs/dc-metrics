@@ -4,25 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --no-semi --single-quote --bracket-spacing --braces-spacing --jsx-single-quote --space-before-function-paren --write \"src/**/*.{ts,tsx}\"",
-    "bundle": "webpack",
-    "dev": "webpack-dev-server",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "check-format": "prettier --list-different \"src/**/*.{ts,tsx}\"",
+    "bundle": "webpack -p",
+    "start": "webpack-dev-server",
+    "ci": "npm run check-format && npm test",
     "test": "jest"
-  },
-  "prettier": {
-    "printWidth": 80,
-    "tabWidth": 2,
-    "useTabs": false,
-    "semi": false,
-    "singleQuote": true,
-    "jsxSingleQuote": true,
-    "trailingComma": "none",
-    "bracketSpacing": true,
-    "bracesSpacing": true,
-    "jsxBracketSpacingSameLine": false,
-    "alignObjectProperties": true,
-    "noSpaceEmptyFn": false,
-    "spaceBeforeFunctionParen": true
   },
   "jest": {
     "transform": {
@@ -42,12 +29,15 @@
     },
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**"
+      "src/**",
+      "!src/**/*.d.ts"
     ]
   },
   "dependencies": {
     "@blueprintjs/core": "^1.23.1",
     "csstips": "^0.2.0",
+    "es6-promise": "^4.1.1",
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "mobx": "^3.1.16",
     "mobx-react": "^4.2.2",
@@ -60,6 +50,7 @@
     "victory": "^0.21.2"
   },
   "devDependencies": {
+    "@types/es6-promise": "0.0.32",
     "@types/jest": "^19.2.3",
     "@types/lodash": "^4.14.68",
     "@types/node": "^7.0.33",
@@ -73,9 +64,8 @@
     "coveralls": "^2.13.1",
     "fork-ts-checker-notifier-webpack-plugin": "^0.2.0",
     "fork-ts-checker-webpack-plugin": "^0.2.7",
-    "husky": "^0.14.2",
     "jest": "^20.0.3",
-    "prettier-miscellaneous": "^1.5.2",
+    "prettier": "^1.5.3",
     "ts-jest": "^20.0.4",
     "ts-loader": "^2.3.0",
     "ts-node": "^3.2.0",

@@ -1,47 +1,32 @@
-import * as React from 'react'
-import { observer } from '~/utils'
-import { style } from 'typestyle'
-import { Tab2, Tabs2 } from '@blueprintjs/core'
-import {
-  VictoryChart,
-  VictoryTheme,
-  VictoryBar,
-  VictoryAxis,
-  VictoryArea,
-  VictoryLabel,
-  VictoryLine,
-  VictoryScatter
-} from 'victory'
-
-const appClassName = style({
-  padding: '40px'
-})
+import * as React from "react";
+import { ReactiveComponent } from "~/utils";
+import { style } from "typestyle";
+import * as V from "victory";
 
 const chartContainerClassName = style({
-  height: '400px'
-})
+  height: "400px",
+  background: "blue"
+});
 
-export const App = observer(({}, { store }) => {
+export const App = ReactiveComponent((_, store) => {
   return (
-    <div className={appClassName}>
-      <h1>Server Metrics</h1>
-      <Tabs2 id='main'>
-        <Tab2 id='dev' title='Development' panel={<div />} />
-        <Tab2 id='qa' title='Quality Assurance' panel={<div />} />
-        <Tab2 id='preprod' title='Pre-Production' panel={<div />} />
-      </Tabs2>
+    <div>
       <div className={chartContainerClassName}>
-        <VictoryChart animate={{ duration: 250 }}>
-          <VictoryArea
+        <V.VictoryChart
+          animate={{ duration: 250 }}
+          containerComponent={<V.VictoryContainer responsive={false} />}
+        >
+          <V.VictoryArea
             data={store.memoryCollection.devMemoryFree}
             style={{
               data: {
-                fill: 'rgba(50,200,100,.3)'
+                fill: "rgba(50,200,100,.3)"
               }
             }}
           />
-        </VictoryChart>
+          <V.VictoryAxis dependentAxis />
+        </V.VictoryChart>
       </div>
     </div>
-  )
-})
+  );
+});

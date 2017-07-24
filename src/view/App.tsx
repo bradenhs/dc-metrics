@@ -9,7 +9,7 @@ const chartContainerClassName = style({
 });
 
 export const App = ReactiveComponent(({}, store) => {
-  console.log("hello", store);
+  console.log("again", store);
   return (
     <div>
       <div className={chartContainerClassName}>

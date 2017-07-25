@@ -11,19 +11,24 @@ import { Store } from "~/store";
 import { style } from "typestyle";
 import { StoreProvider } from "~/utils";
 import { useStrict } from "mobx";
+import { Colors } from "@blueprintjs/core";
 
 useStrict(true);
 
 // Initial CSS setup
 normalize();
-document.body.className = style({
-  background: "#293742",
-  $nest: {
-    "&>*": {
-      outline: "none !important"
+document.body.classList.add(
+  style({
+    background: Colors.DARK_GRAY3,
+    $nest: {
+      "&>*": {
+        outline: "none !important"
+      }
     }
-  }
-});
+  })
+);
+
+document.body.classList.add("pt-dark");
 
 // Initialize our store
 const store = new Store();

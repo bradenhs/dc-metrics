@@ -1,0 +1,1 @@
+export const MAX_SNAPSHOTS_IN_MEMORY = 30;

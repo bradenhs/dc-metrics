@@ -1,30 +1,17 @@
 import * as React from "react";
 import { ReactiveComponent } from "~/utils";
-import * as V from "victory";
+import { Menu } from "~/view";
+import { style } from "typestyle";
 
-export const App = ReactiveComponent(({}, { ui, snapshotCollection }) => {
+const appClassName = style({
+  padding: "40px",
+  minWidth: "1200px"
+});
+
+export const App = ReactiveComponent(() => {
   return (
-    <div>
-      <V.VictoryChart
-        animate={{ duration: 450 }}
-        domain={snapshotCollection.domain}
-        padding={0}
-        height={ui.windowHeight}
-        width={ui.windowWidth}
-      >
-        <V.VictoryArea
-          style={{ data: { opacity: 0.5, fill: "#239912" } }}
-          data={snapshotCollection.loadedSnapshots}
-          x="time"
-          y="memoryFree"
-        />
-        <V.VictoryScatter
-          style={{ data: { fill: "#ffffff" } }}
-          data={snapshotCollection.loadedSnapshots}
-          x="time"
-          y="memoryFree"
-        />
-      </V.VictoryChart>
+    <div className={appClassName}>
+      <Menu />
     </div>
   );
 });

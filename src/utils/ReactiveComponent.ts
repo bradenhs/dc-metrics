@@ -21,7 +21,7 @@ interface StatelessReactiveComponent<P = {}> {
 export function ReactiveComponent<P>(
   reactiveComponent: StatelessReactiveComponent<P>
 ) {
-  if (reactiveComponent.length === 1) {
+  if (reactiveComponent.length <= 1) {
     return observer<P>(reactiveComponent);
   }
 
@@ -38,6 +38,6 @@ export function ReactiveComponent<P>(
   }
 
   throw new Error(
-    "Component provided should have only one or two expected arguments"
+    "Component provided should have two or less expected arguments"
   );
 }

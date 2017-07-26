@@ -9,9 +9,9 @@ import * as ReactDOM from "react-dom";
 import { App } from "~/view";
 import { Store } from "~/store";
 import { style } from "typestyle";
-import { StoreProvider, urlSync } from "~/utils";
+import { StoreProvider } from "~/utils";
+import { startRouter } from "~/services";
 import { useStrict } from "mobx";
-import { Endpoint } from "~/constants";
 import { Colors } from "@blueprintjs/core";
 
 useStrict(true);
@@ -22,8 +22,9 @@ document.body.classList.add(
   style({
     background: Colors.DARK_GRAY3,
     $nest: {
-      "&>*": {
-        outline: "none !important"
+      "*": {
+        outline: "none !important",
+        userSelect: "none"
       }
     }
   })
@@ -35,29 +36,7 @@ document.body.classList.add("pt-dark");
 const store = new Store();
 
 // Setup routing
-urlSync({
-  toState(url) {
-    const endpoint = {
-      "/dev": Endpoint.DEV,
-      "/qa": Endpoint.QA,
-      "/preprod": Endpoint.PREPROD
-    }[url.pathname];
-    if (endpoint == null) {
-      store.set404(true);
-    } else {
-      store.set404(false);
-      store.setEndpoint(endpoint);
-    }
-  },
-  toUrlPath() {
-    const urlFriendlyEndpoint = {
-      [Endpoint.DEV]: "dev",
-      [Endpoint.QA]: "qa",
-      [Endpoint.PREPROD]: "preprod"
-    }[store.selectedEndpoint];
-    return `/${urlFriendlyEndpoint}`;
-  }
-});
+startRouter(store);
 
 // Create a container the application and render our app into it
 const appContainer = document.createElement("div");

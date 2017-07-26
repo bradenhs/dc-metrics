@@ -7,7 +7,7 @@ interface UrlSyncParams {
    * something besides a state change this function will be called again to
    * ensure the state is in sync with the url.
    */
-  toState(url: URL);
+  setState(url: URL);
 
   /**
    * Function that is wrapped in a call to mobx's computed function.
@@ -15,7 +15,15 @@ interface UrlSyncParams {
    * state. This is the function that maps the state to a url. Note this
    * is mapping to the url path i.e. everything after the domain nmae.
    */
-  toUrlPath(): string;
+  getUrl(): string;
+
+  /**
+   * This function maps the current state of the application to what the 
+   * title should be. Just like toUrlPath this function is wrapped in mobx's
+   * computed function and will be run again automatically to keep the title
+   * in sync with the current application state.
+   */
+  getTitle(): string;
 
   /**
    * Function using the current url and the new url to decide whether or not
@@ -27,25 +35,35 @@ interface UrlSyncParams {
   shouldPush?(current: URL, next: URL): boolean;
 }
 
-export function urlSync({ toState, toUrlPath, shouldPush }: UrlSyncParams) {
+export function urlSync({
+  setState,
+  getUrl,
+  getTitle,
+  shouldPush
+}: UrlSyncParams) {
   // Verify we were given the right stuff
-  if (typeof toState !== "function") {
+  if (typeof setState !== "function") {
     throw new Error("toState must be a function");
   }
-  if (typeof toUrlPath !== "function") {
+  if (typeof getUrl !== "function") {
     throw new Error("toUrl must be a function");
   }
 
   // Make sure the current state is in sync with the url
-  toState(getUrl());
+  setState(url());
 
   // Anytime "popstate" is called make sure we are in sync
   window.addEventListener("popstate", () => {
-    toState(getUrl());
+    setState(url());
   });
 
+  // Keep the title in sync
+  computed(getTitle).observe(({ newValue }) => {
+    document.title = newValue;
+  }, true);
+
   // Anytime the url path is updated make sure the url reflects that
-  computed(toUrlPath).observe(({ newValue }) => {
+  computed(getUrl).observe(({ newValue }) => {
     // verify the newValue is a proper pathname
     if (!/^\/.*$/.test(newValue)) {
       throw new Error(
@@ -54,10 +72,12 @@ export function urlSync({ toState, toUrlPath, shouldPush }: UrlSyncParams) {
     }
 
     // Test if we should use pushState or replaceState
-    let doPushState = true;
-    if (typeof shouldPush === "function") {
-      const currentUrl = getUrl();
-      doPushState = shouldPush(currentUrl, new URL(newValue, currentUrl.href));
+    const currentUrl = url();
+    const newUrl = new URL(newValue, currentUrl.href);
+    let doPushState = currentUrl.href !== newUrl.href;
+
+    if (doPushState && typeof shouldPush === "function") {
+      doPushState = shouldPush(currentUrl, newUrl);
     }
 
     if (doPushState) {
@@ -69,6 +89,6 @@ export function urlSync({ toState, toUrlPath, shouldPush }: UrlSyncParams) {
 }
 
 // Nothing fancy here, just sugar
-function getUrl() {
+function url() {
   return new URL(location.href);
 }

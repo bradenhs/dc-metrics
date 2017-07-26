@@ -5,3 +5,4 @@ export * from "./StoreProvider";
 export * from "./isInteger";
 export * from "./mix";
 export * from "./types";
+export * from "./urlSync";

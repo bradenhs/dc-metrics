@@ -43,7 +43,8 @@ const config: Configuration = {
   devServer: {
     contentBase: __dirname + "/www",
     overlay: true,
-    watchContentBase: true
+    watchContentBase: true,
+    historyApiFallback: true
   }
 };
 

@@ -38,21 +38,4 @@ export class Store {
   get visibleVisualizations() {
     return this.visualizations.filter(visualization => visualization.visible);
   }
-
-  @computed
-  get location() {
-    const urlFriendlyEndpoint = {
-      [Endpoint.DEV]: "dev",
-      [Endpoint.PREPROD]: "preprod",
-      [Endpoint.QA]: "qa"
-    };
-
-    const sortedVisualizations = this.visibleVisualizations
-      .slice()
-      .sort((a, b) => {
-        return a.position > b.position ? 1 : -1;
-      });
-
-    return `#!/${urlFriendlyEndpoint}?${sortedVisualizations.join(",")}`;
-  }
 }

@@ -1,4 +1,4 @@
-import { ReactiveComponent } from "~/utils";
+import { ReactiveComponent } from ".../utils";
 import * as React from "react";
 
 export const HeapVis = ReactiveComponent(() => {

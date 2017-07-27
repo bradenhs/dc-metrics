@@ -1,6 +1,6 @@
 import * as React from "react";
 import Transition from "react-transition-group/Transition";
-import { ReactiveComponent } from "~/utils";
+import { ReactiveComponent } from ".../utils";
 import { style, classes } from "typestyle";
 
 const TRANSITION_TIME = 450;

@@ -8,5 +8,8 @@
     "node_modules": false,
     "coverage": true
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "path-intellisense.mappings": {
+    "...": "${workspaceRoot}/src"
+  }
 }

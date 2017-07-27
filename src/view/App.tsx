@@ -1,7 +1,7 @@
 import * as React from "react";
-import { ReactiveComponent } from "~/utils";
+import { ReactiveComponent } from ".../utils";
 import { flex, horizontal, content, width } from "csstips";
-import { Menu, Visualizations, RawView, EnterTransition } from "~/view";
+import { SideBar, Visualizations, RawView, EnterTransition } from ".../view";
 import { style } from "typestyle";
 
 const appClassName = style(
@@ -23,7 +23,9 @@ const rightColumnClassName = style(flex, {
 export const App = ReactiveComponent(() => {
   return (
     <div className={appClassName}>
-      <Menu className={leftColumnClassName} />
+      <div className={leftColumnClassName}>
+        <SideBar />
+      </div>
       <div className={rightColumnClassName}>
         <EnterTransition delay={70}>
           <RawView />

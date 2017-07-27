@@ -1,8 +1,8 @@
-import { SnapshotCollectionStore, VisualizationStore } from "~/store";
-import { sleep } from "~/utils";
+import { SnapshotCollectionStore, VisualizationStore } from ".../store";
+import { sleep } from ".../utils";
 import { observable, computed, action } from "mobx";
-import { Endpoint, Visualization } from "~/constants";
-import { showToast } from "~/services";
+import { Endpoint, Visualization } from ".../constants";
+import { showToast } from ".../services";
 import * as copy from "copy-to-clipboard";
 import { Intent } from "@blueprintjs/core";
 
@@ -52,9 +52,9 @@ export class Store {
 
   async startPolling() {
     while (true) {
-      // this.devSnapshotCollection.fetchSnapshot();
-      // this.qaSnapshotCollection.fetchSnapshot();
-      // this.preprodSnapshotCollection.fetchSnapshot();
+      this.devSnapshotCollection.fetchSnapshot();
+      this.qaSnapshotCollection.fetchSnapshot();
+      this.preprodSnapshotCollection.fetchSnapshot();
       await sleep();
     }
   }

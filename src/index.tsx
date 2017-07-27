@@ -3,34 +3,18 @@ import * as es6Promise from "es6-promise";
 es6Promise.polyfill();
 import "isomorphic-fetch";
 
-import { normalize } from "csstips";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { App } from "~/view";
-import { Store } from "~/store";
-import { style, forceRenderStyles } from "typestyle";
-import { StoreProvider } from "~/utils";
-import { startRouter } from "~/services";
+import { App } from ".../view";
+import { Store } from ".../store";
+import { StoreProvider } from ".../utils";
+import { startRouter, setupStyling } from ".../services";
 import { useStrict } from "mobx";
-import { Colors } from "@blueprintjs/core";
 
 useStrict(true);
 
-// Initial CSS setup
-normalize();
-document.body.classList.add(
-  style({
-    background: Colors.DARK_GRAY3,
-    $nest: {
-      "*": {
-        outline: "none !important",
-        userSelect: "none"
-      }
-    }
-  })
-);
-
-document.body.classList.add("pt-dark");
+// CSS stuff
+setupStyling();
 
 // Initialize our store
 const store = new Store();
@@ -47,8 +31,6 @@ ReactDOM.render(
   </StoreProvider>,
   appContainer
 );
-
-forceRenderStyles();
 
 // Intiate the polling
 store.startPolling();

@@ -1,6 +1,6 @@
-import { fetchJSON, asNumber, asInteger } from "~/utils";
-import { SnapshotStore } from "~/store";
-import { Endpoint } from "~/constants";
+import { fetchJSON, asNumber, asInteger } from ".../utils";
+import { SnapshotStore } from ".../store";
+import { Endpoint } from ".../constants";
 
 export async function fetchSnapshot(endpoint: Endpoint) {
   const data = await fetchJSON(endpoint);
@@ -40,6 +40,8 @@ function parseSnapshotData(data) {
   snapshot.heapInit = asInteger(data["heap.init"]);
   snapshot.heapUsed = asInteger(data["heap.used"]);
   snapshot.heap = asInteger(data["heap"]);
+
+  snapshot.raw = data;
 
   return snapshot;
 }

@@ -5,6 +5,8 @@ let start = Date.now();
 export class SnapshotStore {
   readonly time = Math.floor((Date.now() - start) / 1000);
 
+  raw: string;
+
   cache: {
     [cacheName: string]: {
       hitRatio: number;
@@ -65,5 +67,16 @@ export class SnapshotStore {
     return Object.keys(this.statusCodeTotals).map((status, index) => {
       return { x: index, y: this.statusCodeTotals[status], label: status };
     });
+  }
+
+  @computed
+  get sortedRaw() {
+    const obj = {};
+
+    Object.keys(this.raw).sort().forEach(key => {
+      obj[key] = this.raw[key];
+    });
+
+    return obj;
   }
 }

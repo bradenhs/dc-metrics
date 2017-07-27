@@ -1,7 +1,7 @@
 import { action, computed, observable } from "mobx";
-import { SnapshotStore } from "~/store";
-import { api } from "~/services";
-import { MAX_SNAPSHOTS_IN_MEMORY, Endpoint } from "~/constants";
+import { SnapshotStore } from ".../store";
+import { api } from ".../services";
+import { MAX_SNAPSHOTS_IN_MEMORY, Endpoint } from ".../constants";
 import { last } from "lodash";
 
 export class SnapshotCollectionStore {

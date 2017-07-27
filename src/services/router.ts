@@ -1,6 +1,6 @@
-import { urlSync } from "~/utils";
-import { Store } from "~/store";
-import { Endpoint } from "~/constants";
+import { urlSync } from ".../utils";
+import { Store } from ".../store";
+import { Endpoint } from ".../constants";
 
 export function startRouter(store: Store) {
   urlSync({

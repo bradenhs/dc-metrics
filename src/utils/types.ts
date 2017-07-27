@@ -1,4 +1,4 @@
-import { isInteger } from "~/utils";
+import { isInteger } from ".../utils";
 
 export function asNumber(value) {
   if (typeof value != "number") {

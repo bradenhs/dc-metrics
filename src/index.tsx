@@ -8,7 +8,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { App } from "~/view";
 import { Store } from "~/store";
-import { style } from "typestyle";
+import { style, forceRenderStyles } from "typestyle";
 import { StoreProvider } from "~/utils";
 import { startRouter } from "~/services";
 import { useStrict } from "mobx";
@@ -47,6 +47,8 @@ ReactDOM.render(
   </StoreProvider>,
   appContainer
 );
+
+forceRenderStyles();
 
 // Intiate the polling
 store.startPolling();

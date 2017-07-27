@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ReactiveComponent } from "~/utils";
 import { flex, horizontal, content, width } from "csstips";
-import { Menu, Visualizations, RawView } from "~/view";
+import { Menu, Visualizations, RawView, EnterTransition } from "~/view";
 import { style } from "typestyle";
 
 const appClassName = style(
@@ -16,8 +16,8 @@ const appClassName = style(
 const leftColumnClassName = style(content, width(200));
 
 const rightColumnClassName = style(flex, {
-  marginLeft: "30px",
-  marginTop: "43px"
+  marginLeft: "26px",
+  marginTop: "23px"
 });
 
 export const App = ReactiveComponent(() => {
@@ -25,8 +25,10 @@ export const App = ReactiveComponent(() => {
     <div className={appClassName}>
       <Menu className={leftColumnClassName} />
       <div className={rightColumnClassName}>
-        <RawView />
-        <Visualizations />
+        <EnterTransition delay={70}>
+          <RawView />
+          <Visualizations />
+        </EnterTransition>
       </div>
     </div>
   );

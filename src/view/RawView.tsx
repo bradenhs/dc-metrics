@@ -16,10 +16,12 @@ const viewRawClassName = classes(
 
 const cardClassName = classes(
   style({
-    top: "200px",
-    left: "calc(50% - 200px)",
-    zIndex: 21,
-    width: "400px"
+    top: "50px",
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    opacity: 1,
+    zIndex: 21
   }),
   "pt-card",
   "pt-elevation-4"

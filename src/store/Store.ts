@@ -2,6 +2,9 @@ import { SnapshotCollectionStore, VisualizationStore } from "~/store";
 import { sleep } from "~/utils";
 import { observable, computed, action } from "mobx";
 import { Endpoint, Visualization } from "~/constants";
+import { showToast } from "~/services";
+import * as copy from "copy-to-clipboard";
+import { Intent } from "@blueprintjs/core";
 
 export class Store {
   devSnapshotCollection = new SnapshotCollectionStore(Endpoint.DEV);
@@ -31,11 +34,27 @@ export class Store {
     return this.visualizations.filter(visualization => visualization.visible);
   }
 
+  shareCurrentView() {
+    if (copy(location.href)) {
+      showToast({
+        message: "Link to current view copied to the clipboard",
+        intent: Intent.SUCCESS,
+        iconName: "link"
+      });
+    } else {
+      showToast({
+        message: "There was an issue copying the link to the clipboard",
+        intent: Intent.WARNING,
+        iconName: "link"
+      });
+    }
+  }
+
   async startPolling() {
     while (true) {
-      this.devSnapshotCollection.fetchSnapshot();
-      this.qaSnapshotCollection.fetchSnapshot();
-      this.preprodSnapshotCollection.fetchSnapshot();
+      // this.devSnapshotCollection.fetchSnapshot();
+      // this.qaSnapshotCollection.fetchSnapshot();
+      // this.preprodSnapshotCollection.fetchSnapshot();
       await sleep();
     }
   }

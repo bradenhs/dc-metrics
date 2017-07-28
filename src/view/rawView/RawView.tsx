@@ -41,12 +41,14 @@ export const RawView = ReactiveComponent(({}, store) => {
     <div>
       <div className="pt-callout pt-intent-primary">
         Polling{" "}
-        <code className={endPointClassName}>{store.selectedEndpoint}</code> once
-        every second.
+        <code className={endPointClassName}>
+          {store.selectedEndpoint}/manage/metrics
+        </code>
         <Button
           text="View Raw"
           className={viewRawClassName}
           onClick={store.openRawView}
+          disabled={store.currentEndpointDown}
         />
       </div>
       <Overlay

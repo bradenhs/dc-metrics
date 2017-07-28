@@ -1,7 +1,7 @@
 export enum Endpoint {
-  DEV = "http://amis-dev:9000/manage/metrics",
-  QA = "http://amis-qa:9000/manage/metrics",
-  PREPROD = "http://amis-preprod:9000/manage/metrics"
+  DEV = "http://amis-dev:9000",
+  QA = "http://amis-qa:9000",
+  PREPROD = "http://amis-preprod:9000"
 }
 
 export enum Visualization {

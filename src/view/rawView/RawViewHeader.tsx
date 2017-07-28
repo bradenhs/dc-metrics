@@ -22,7 +22,7 @@ export const RawViewHeader = ReactiveComponent(({}, store) => {
     <div className={rawViewHeaderClassName}>
       <b>Endpoint:</b>
       <code>
-        {store.selectedEndpoint}
+        {store.selectedEndpoint}/manage/metrics
       </code>
       <Button
         iconName="cross"

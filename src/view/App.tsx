@@ -5,7 +5,8 @@ import {
   SideBar,
   VisualizationsContainer,
   RawView,
-  EnterTransition
+  EnterTransition,
+  DetailsJSONView
 } from ".../view";
 import { style } from "typestyle";
 
@@ -24,7 +25,7 @@ const leftColumnClassName = style(content, width(200));
 
 const rightColumnClassName = style(flex, {
   marginLeft: "26px",
-  marginTop: "25px"
+  marginTop: "23px"
 });
 
 export const App = ReactiveComponent(() => {
@@ -34,13 +35,14 @@ export const App = ReactiveComponent(() => {
         <SideBar />
       </div>
       <div className={rightColumnClassName}>
-        <EnterTransition delay={70}>
+        <EnterTransition delay={100}>
           <RawView />
         </EnterTransition>
-        <EnterTransition delay={100}>
+        <EnterTransition delay={160}>
           <VisualizationsContainer />
         </EnterTransition>
       </div>
+      <DetailsJSONView />
     </div>
   );
 });

@@ -7,7 +7,7 @@ interface Props {
 }
 
 const headerClassName = style({
-  marginLeft: "10px"
+  marginLeft: "15px"
 });
 
 const spacerClassName = style({
@@ -17,9 +17,9 @@ const spacerClassName = style({
 export const SideBarCard = ReactiveComponent<Props>(({ title, children }) => {
   return (
     <div className={spacerClassName}>
-      <h5 className={headerClassName}>
+      <h6 className={headerClassName}>
         {title}
-      </h5>
+      </h6>
       <div className="pt-card">
         {children}
       </div>

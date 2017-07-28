@@ -4,7 +4,8 @@ import {
   EnterTransition,
   InstanceSelectionCard,
   ShareCard,
-  VisManagementCard
+  VisManagementCard,
+  DetailsCard
 } from ".../view";
 
 export const SideBar = ReactiveComponent(() => {
@@ -17,6 +18,9 @@ export const SideBar = ReactiveComponent(() => {
         <VisManagementCard />
       </EnterTransition>
       <EnterTransition delay={60}>
+        <DetailsCard />
+      </EnterTransition>
+      <EnterTransition delay={90}>
         <ShareCard />
       </EnterTransition>
     </div>

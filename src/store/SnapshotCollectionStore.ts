@@ -1,8 +1,9 @@
 import { action, computed, observable } from "mobx";
 import { SnapshotStore } from ".../store";
-import { api } from ".../services";
+import { api, showToast } from ".../services";
 import { MAX_SNAPSHOTS_IN_MEMORY, Endpoint } from ".../constants";
 import { last } from "lodash";
+import { Intent } from "@blueprintjs/core";
 
 export class SnapshotCollectionStore {
   snapshots = observable.shallowArray<SnapshotStore>();
@@ -20,7 +21,11 @@ export class SnapshotCollectionStore {
     try {
       snapshot = await api.fetchSnapshot(this.endpoint);
     } catch (e) {
-      // TODO handle error here
+      console.error(e);
+      showToast({
+        message: "Error polling " + this.endpoint,
+        intent: Intent.WARNING
+      });
       return;
     }
 

@@ -1,1 +1,3 @@
 export const MAX_SNAPSHOTS_IN_MEMORY = 30;
+export const METRICS_POLLING_INTERVAL = 500;
+export const HEALTH_POLLING_INTERVAL = 5000;

@@ -12,6 +12,12 @@ const dimmed = style({
   opacity: 0.9
 });
 
+let lastToast: string;
+let lastToastKey: string;
+
 export function showToast(toast: IToastProps) {
-  toaster.show({ ...toast, className: dimmed });
+  if (JSON.stringify(toast) !== lastToast) {
+    toaster.dismiss(lastToastKey);
+  }
+  lastToastKey = toaster.show({ ...toast, className: dimmed });
 }

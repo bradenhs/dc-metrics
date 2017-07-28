@@ -14,12 +14,27 @@ const nonIdealStateClassName = style({
 });
 
 export const VisualizationsContainer = ReactiveComponent(
-  ({}, { visibleVisualizations }) => {
+  (
+    {},
+    { visibleVisualizations, currentEndpointDown, currentEndpointTitle }
+  ) => {
     const visualizationMap = {
       [Visualization.CACHE]: <CacheVis />,
       [Visualization.HEAP]: <HeapVis />,
       [Visualization.STATUS]: <StatusVis />
     };
+
+    if (currentEndpointDown) {
+      return (
+        <div className={containerClassName}>
+          <NonIdealState
+            className={nonIdealStateClassName}
+            title={`${currentEndpointTitle} is down`}
+            visual="warning-sign"
+          />
+        </div>
+      );
+    }
 
     return (
       <div className={containerClassName}>
@@ -27,7 +42,7 @@ export const VisualizationsContainer = ReactiveComponent(
           <NonIdealState
             className={nonIdealStateClassName}
             title="No Visualizations Selected"
-            visual="chart"
+            visual="timeline-bar-chart"
           />}
         {visibleVisualizations.map(v => {
           return (

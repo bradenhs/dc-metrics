@@ -10,8 +10,7 @@ export function setupStyling() {
       background: Colors.DARK_GRAY3,
       $nest: {
         "*": {
-          outline: "none !important",
-          userSelect: "none"
+          outline: "none !important"
         }
       }
     })

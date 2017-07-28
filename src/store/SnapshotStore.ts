@@ -11,6 +11,7 @@ export class SnapshotStore {
     [cacheName: string]: {
       hitRatio: number;
       missRatio: number;
+      size: number;
     };
   } = {};
 
@@ -42,10 +43,10 @@ export class SnapshotStore {
   @computed
   get heapData() {
     return [
-      { x: "Heap Committed", y: this.heapCommitted },
-      { x: "Heap Init", y: this.heapInit },
-      { x: "Heap Used", y: this.heapUsed },
-      { x: "Heap", y: this.heap }
+      { label: "Heap", value: this.heap },
+      { label: "Heap Committed", value: this.heapCommitted },
+      { label: "Heap Used", value: this.heapUsed },
+      { label: "Heap Init", value: this.heapInit }
     ];
   }
 
@@ -54,9 +55,16 @@ export class SnapshotStore {
     return Object.keys(this.cache).sort().map(cacheName => {
       return {
         cacheName,
+        size: this.cache[cacheName].size,
         data: [
-          { x: 0, y: this.cache[cacheName].hitRatio, label: "Hit Ratio" },
-          { x: 1, y: this.cache[cacheName].missRatio, label: "Miss Ratio" }
+          {
+            label: "Hits",
+            value: this.cache[cacheName].hitRatio
+          },
+          {
+            label: "Misses",
+            value: this.cache[cacheName].missRatio
+          }
         ]
       };
     });
@@ -64,8 +72,16 @@ export class SnapshotStore {
 
   @computed
   get statusCodeData() {
-    return Object.keys(this.statusCodeTotals).map((status, index) => {
-      return { x: index, y: this.statusCodeTotals[status], label: status };
+    return Object.keys(this.counter).sort().map(endpoint => {
+      return {
+        endpoint,
+        data: Object.keys(this.counter[endpoint]).map(status => {
+          return {
+            label: status,
+            value: this.counter[endpoint][status]
+          };
+        })
+      };
     });
   }
 

@@ -2,8 +2,43 @@ import { fetchJSON, asNumber, asInteger } from ".../utils";
 import { SnapshotStore } from ".../store";
 import { Endpoint } from ".../constants";
 
+export async function getDetailsViewJSON(
+  endpoint: Endpoint,
+  detailsEndpoint: string
+) {
+  try {
+    const response = await fetch(`${endpoint}/${detailsEndpoint}`);
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+}
+
+export async function getHealthStatus(endpoint: Endpoint) {
+  try {
+    const response = await fetch(`${endpoint}/manage/health`);
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+}
+
+export async function clearCaches(endpoint: Endpoint) {
+  try {
+    const response = await fetch(`${endpoint}/api/manage/cache/clearAll`, {
+      method: "POST"
+    });
+    return response.status === 200;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+}
+
 export async function fetchSnapshot(endpoint: Endpoint) {
-  const data = await fetchJSON(endpoint);
+  const data = await fetchJSON(endpoint + "/manage/metrics");
 
   return parseSnapshotData(data);
 }
@@ -15,14 +50,17 @@ function parseSnapshotData(data) {
     const { cacheName, metric } = parseCacheKey(key);
     if (snapshot.cache[cacheName] == null) {
       snapshot.cache[cacheName] = {
-        hitRatio: null,
-        missRatio: null
+        hitRatio: 0,
+        missRatio: 0,
+        size: 0
       };
     }
     if (metric === "hit.ratio") {
       snapshot.cache[cacheName].hitRatio = asNumber(data[key]);
     } else if (metric === "miss.ratio") {
       snapshot.cache[cacheName].missRatio = asNumber(data[key]);
+    } else if (metric === "size") {
+      snapshot.cache[cacheName].size = asNumber(data[key]);
     } else {
       snapshot.cache[cacheName][metric] = asNumber(data[key]);
     }

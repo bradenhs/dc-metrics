@@ -1,4 +1,4 @@
-import { computed } from "mobx";
+import { computed, action } from "mobx";
 
 interface UrlSyncParams {
   /**
@@ -49,13 +49,13 @@ export function urlSync({
     throw new Error("toUrl must be a function");
   }
 
+  const runSetState = action(() => setState(url()));
+
   // Make sure the current state is in sync with the url
-  setState(url());
+  runSetState();
 
   // Anytime "popstate" is called make sure we are in sync
-  window.addEventListener("popstate", () => {
-    setState(url());
-  });
+  window.addEventListener("popstate", runSetState);
 
   // Keep the title in sync
   computed(getTitle).observe(({ newValue }) => {

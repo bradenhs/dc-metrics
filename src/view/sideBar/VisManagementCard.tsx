@@ -3,17 +3,22 @@ import { ReactiveComponent } from ".../utils";
 import { Checkbox } from "@blueprintjs/core";
 import { SideBarCard } from ".../view";
 
-export const VisManagementCard = ReactiveComponent(() => {
+export const VisManagementCard = ReactiveComponent(({}, { visualizations }) => {
   return (
     <SideBarCard title="Visualizations">
-      <Checkbox checked={false} label="Cache" />
-      <Checkbox checked={true} label="Heap" />
-      <Checkbox checked={false} label="Status Codes" />
-      <Checkbox checked={false} label="Memory" />
-      <Checkbox checked={false} label="Cache" />
-      <Checkbox checked={true} label="Heap" />
-      <Checkbox checked={false} label="Status Codes" />
-      <Checkbox checked={false} label="Memory" />
+      {visualizations.map((v, index) => {
+        return (
+          <Checkbox
+            key={v.name}
+            checked={v.visible}
+            label={v.name}
+            onChange={v.toggleVisiblility}
+            style={{
+              marginBottom: index === visualizations.length - 1 && "0px"
+            }}
+          />
+        );
+      })}
     </SideBarCard>
   );
 });

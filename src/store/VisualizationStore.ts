@@ -1,16 +1,17 @@
 import { observable, action } from "mobx";
+import { Visualization } from ".../constants";
 
 export class VisualizationStore {
-  readonly name: string;
+  readonly name: Visualization;
   @observable position: number;
   @observable visible = true;
 
-  constructor(name: string, index: number) {
+  constructor(name: Visualization, index: number) {
     this.name = name;
     this.position = index;
   }
 
-  @action
+  @action.bound
   toggleVisiblility() {
     this.visible = !this.visible;
   }

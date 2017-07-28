@@ -5,7 +5,7 @@ export enum Endpoint {
 }
 
 export enum Visualization {
-  HEAP = "heap",
-  CACHE = "cache",
-  STATUS = "status"
+  HEAP = "Heap",
+  CACHE = "Cache",
+  STATUS = "Status Codes"
 }

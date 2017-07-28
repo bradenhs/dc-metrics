@@ -1,6 +1,6 @@
 import { urlSync } from ".../utils";
 import { Store } from ".../store";
-import { Endpoint } from ".../constants";
+import { Endpoint, Visualization } from ".../constants";
 
 export function startRouter(store: Store) {
   urlSync({
@@ -10,6 +10,24 @@ export function startRouter(store: Store) {
         "/qa": Endpoint.QA,
         "/preprod": Endpoint.PREPROD
       }[url.pathname];
+
+      const visibleVisualizations = [];
+
+      (url.searchParams.get("v") || "heap,cache,status")
+        .split(",")
+        .forEach(v => {
+          visibleVisualizations.push(
+            {
+              heap: Visualization.HEAP,
+              cache: Visualization.CACHE,
+              status: Visualization.STATUS
+            }[v]
+          );
+        });
+
+      store.visualizations.forEach(v => {
+        v.visible = visibleVisualizations.indexOf(v.name) >= 0;
+      });
 
       store.setEndpoint(endpoint || Endpoint.DEV);
     },
@@ -21,7 +39,18 @@ export function startRouter(store: Store) {
         [Endpoint.PREPROD]: "preprod"
       }[store.selectedEndpoint];
 
-      return `/${urlFriendlyEndpoint || "dev"}`;
+      const urlFriendlyVisualizationList = store.visibleVisualizations
+        .map(v => {
+          return {
+            [Visualization.HEAP]: "heap",
+            [Visualization.CACHE]: "cache",
+            [Visualization.STATUS]: "status"
+          }[v.name];
+        })
+        .join(",");
+
+      return `/${urlFriendlyEndpoint ||
+        "dev"}?v=${urlFriendlyVisualizationList}`;
     },
 
     getTitle() {

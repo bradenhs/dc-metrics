@@ -52,9 +52,9 @@ export class Store {
 
   async startPolling() {
     while (true) {
-      this.devSnapshotCollection.fetchSnapshot();
-      this.qaSnapshotCollection.fetchSnapshot();
-      this.preprodSnapshotCollection.fetchSnapshot();
+      // this.devSnapshotCollection.fetchSnapshot();
+      // this.qaSnapshotCollection.fetchSnapshot();
+      // this.preprodSnapshotCollection.fetchSnapshot();
       await sleep();
     }
   }

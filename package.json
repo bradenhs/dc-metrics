@@ -16,22 +16,13 @@
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "\\.spec\\.ts$",
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
+    "moduleFileExtensions": ["ts", "js"],
+    "moduleDirectories": ["node_modules", "src"],
     "moduleNameMapper": {
-      "^~/(.*)$": "$1"
+      "^\\.\\.\\./(.*)$": "$1"
     },
     "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**",
-      "!src/**/*.d.ts"
-    ]
+    "collectCoverageFrom": ["src/**", "!src/**/*.d.ts"]
   },
   "dependencies": {
     "@blueprintjs/core": "^1.23.1",

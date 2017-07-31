@@ -12,7 +12,7 @@ View live at [http://dc-metrics.netlify.com](http://dc-metrics.netlify.com)
 - TypeStyle
 - MobX
 - Prettier
-- Jest
+- Jest (snapshot)
 - Webpack
 
 ## Project Organization
@@ -25,7 +25,7 @@ View live at [http://dc-metrics.netlify.com](http://dc-metrics.netlify.com)
 
 ## Code Organization
 
-- *constants* 
+- *constants*
 - *mixins*
 
 ```typescript

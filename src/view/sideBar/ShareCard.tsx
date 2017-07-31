@@ -7,7 +7,7 @@ export const ShareCard = ReactiveComponent(({}, { shareCurrentView }) => {
     <div className="pt-card">
       <Button
         text="Share Current View"
-        className="pt-fill pt-intent-primary"
+        className="pt-fill"
         onClick={shareCurrentView}
       />
     </div>
